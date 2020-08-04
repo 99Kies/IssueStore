@@ -7,15 +7,21 @@ git_bot = Github("99kies", "xxxxxxx")
 api_v1 = Blueprint('api_v1', __name__)
 
 
-@api_v1.route('/issueStore', methods=["POST", "GET"])
-def issueStore():
+@api_v1.route('/issuestore', methods=["POST", "GET"])
+def issue_store():
     title = request.values.get('title')
     body = request.values.get('body')
     labels = request.values.get('labels')
-
+    money = request.values.get('money')
+    if money is None:
+        return jsonify({
+            "result": "You need give some money.",
+            "code": "201",
+        })
+    body = body + "<br>" + money
     if title and body:
         if labels:
-            repo = git_bot.get_repo("99Kies/a_pri")
+            repo = git_bot.get_repo("SUIBE-Blockchain/IssueStore")
 
             # repo.create_issue("This is a test issue")
             repo.create_issue(title=title, body=body, labels=[labels, ])

@@ -13,13 +13,14 @@ def issue_store():
     body = request.values.get('body')
     labels = request.values.get('labels')
     money = request.values.get('money')
-    body = body + "<br>" + money
     if title and body:
         if money is None:
             return jsonify({
                 "result": "You need give some money.",
                 "code": "201",
             })
+        
+        body = body + "<br>" + money
         if labels:
             repo = git_bot.get_repo("SUIBE-Blockchain/IssueStore")
             repo.create_issue(title=title, body=body, labels=[labels, ])

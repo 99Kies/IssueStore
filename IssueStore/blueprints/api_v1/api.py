@@ -2,7 +2,7 @@ from flask import render_template, request, flash, redirect, url_for,  jsonify, 
 
 from github import Github
 
-git_bot = Github("99kies", "thf1290017556")
+git_bot = Github("99kies", "xxxxxxx")
 
 api_v1 = Blueprint('api_v1', __name__)
 
@@ -20,7 +20,7 @@ def issueStore():
             # repo.create_issue("This is a test issue")
             repo.create_issue(title=title, body=body, labels=[labels, ])
             return jsonify({
-                "result": "hello",
+                "result": "Success Created.",
                 "title": title,
                 "body": body,
                 "labels": labels,
@@ -32,7 +32,7 @@ def issueStore():
             # repo.create_issue("This is a test issue")
             repo.create_issue(title=title, body=body, labels=["development", ])
             return jsonify({
-                "result": "hello",
+                "result": "Success Created.",
                 "title": title,
                 "body": body,
                 "labels": labels,
